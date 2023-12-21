@@ -24,7 +24,19 @@ public class GameManager : MonoBehaviour
    private LetterClick[] letters;
 
    [SerializeField] 
+   private Keyboard keyboard;
+
+   [SerializeField] 
    private Canvas loseScreen;
+
+   [SerializeField] 
+   private ParticleSystem conffettiRight;
+
+   [SerializeField] 
+   private ParticleSystem conffettiLeft;
+
+      [SerializeField] 
+   private ParticleSystem rain;
 
    [SerializeField] 
    private Canvas winScreen;
@@ -68,6 +80,8 @@ public class GameManager : MonoBehaviour
             flower.lives = 7;
         }
 
+        keyboard.KeyboardOn();
+
         foreach (LetterClick letter in letters)
         {
 
@@ -78,6 +92,7 @@ public class GameManager : MonoBehaviour
         loseScreen.enabled = false;
         loseMusic.Stop();
         bgm.Play();
+
         DisplayWord();
     }
 
@@ -86,6 +101,9 @@ public class GameManager : MonoBehaviour
         instance.winScreen.enabled = true;
         winMusic.Play();
         bgm.Stop();
+        conffettiLeft.Play();
+        conffettiRight.Play();
+        keyboard.KeyboardOff();
     }
 
     public void Lose()
@@ -93,6 +111,8 @@ public class GameManager : MonoBehaviour
         instance.loseScreen.enabled = true;
         loseMusic.Play();
         bgm.Stop();
+        rain.Play();
+        keyboard.KeyboardOff();
     }
     
 }

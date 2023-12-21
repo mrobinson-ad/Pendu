@@ -204,6 +204,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lives: 0
+  gameManager: {fileID: 0}
   childs:
   - {fileID: 4831276907260338040}
   - {fileID: 7105771606999166816}
@@ -213,7 +214,7 @@ MonoBehaviour:
   - {fileID: 356577441515914543}
   - {fileID: 6436624104648906531}
   parent: {fileID: 814850360947195821}
-  targetPosition: {x: 3, y: -6.23, z: 0}
+  targetPosition: {x: 5, y: -6.23, z: 0}
   target: {x: 0.6123724, y: -0.3535534, z: -0.3535534, w: -0.6123724}
 --- !u!1 &1890878444629532110
 GameObject:
