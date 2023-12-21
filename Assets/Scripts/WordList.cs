@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
@@ -5,6 +6,7 @@ using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
 using WordSet;
+using UnityEngine.Networking;
 
 public class WordList : MonoBehaviour
 {
@@ -22,9 +24,12 @@ public class WordList : MonoBehaviour
 
     [SerializeField]
     private Toggle fr_toggle;
+
+    private string onlineWord;
     void Awake()
     {
         FillList();
+        GetOnlineWord();
     }
 
     void FillList()
@@ -61,12 +66,12 @@ public class WordList : MonoBehaviour
         "POMME", "BANANE", "ORANGE", "ELEPHANT", "GUITARE",
         "TABLE", "MONTAGNE", "RIVIERE", "VEST", "ORDINATEUR",
         "HEUREUX", "FLEUR", "CIEL", "OCEAN", "ONZE",
-        "DOUZE", "QUATRE-VINGT-DIX", "TIGRE", "LION", "PIANO",
+        "DOUZE", "SALVE", "TIGRE", "LION", "PIANO",
         "VIOLON", "BIBLIOTHEQUE", "RAISIN", "BICYCLETTE", "ZEBRE",
         "VOYAGE", "FUSEE", "LANTERNE", "SAGESSE", "MAITRE",
         "DOCTEUR", "UNIVERS", "HORIZON", "LUNETTES", "FESTIVAL",
         "DEMAIN", "BEAUTE", "JUSTICE", "SAGESSE", "HARMONIE",
-        "COW-BOY", "DRAGON", "PAPILLON", "VAISSEAU SPATIAL", "ARC-EN-CIEL",
+        "COWBOY", "DRAGON", "PAPILLON", "SPATIAL", "LUDIQUE",
         "AVENTURE", "MYSTERE", "FANTAISIE", "SILENCE", "VICTOIRE",
         "REVE", "LEGENDE", "COURAGE", "HONNETETE", "INFINI",
         "GALAXIE", "SERENITE", "CAPITAINE", "VOYAGE", "DESTIN",
@@ -89,7 +94,7 @@ public class WordList : MonoBehaviour
         "VIAJE", "COHETE", "LINTERNA", "SABIDURIA", "MAESTRO",
         "DOCTOR", "UNIVERSO", "HORIZONTE", "GAFAS", "FESTIVAL",
         "MANANA", "BELLEZA", "JUSTICIA", "SABIDURIA", "ARMONIA",
-        "VAQUERO", "DRAGON", "MARIPOSA", "NAVE ESPACIAL", "ARCO IRIS",
+        "VAQUERO", "DRAGON", "MARIPOSA", "NAVE ESPACIAL", "CALLEJON",
         "AVENTURA", "MISTERIO", "FANTASIA", "SILENCIO", "VICTORIA",
         "SUEÑO", "LEYENDA", "CORAJE", "HONESTIDAD", "INFINITO",
         "GALAXIA", "SERENIDAD", "CAPITAN", "JORNADA", "DESTINO",
@@ -136,7 +141,7 @@ public class WordList : MonoBehaviour
     public string GetWord(){
            
             string setting;
-            int index = Random.Range(0, 100);
+            int index = UnityEngine.Random.Range(0, 100);
             if (language == "spanish"){
             setting = this.spanish[index];            
             return setting;
@@ -162,6 +167,46 @@ public class WordList : MonoBehaviour
         } if (es_toggle.isOn == true)
         {
             language = "spanish";
+        }
+    }
+
+    public string GetOnlineWord()
+    {
+        string word;
+
+        if (language == "spanish"){
+            StartCoroutine(GetRequest("https://random-word-api.herokuapp.com/word?lang=es"));
+            word = onlineWord;       
+            return word;
+            } else if (language == "english"){
+            StartCoroutine(GetRequest("https://random-word-api.herokuapp.com/word"));
+            word = onlineWord;
+            return word;            
+            } else{
+            StartCoroutine(GetRequest("https://random-word-api.herokuapp.com/word"));
+            word = onlineWord;
+            return word;
+            }
+    }
+
+    IEnumerator GetRequest(String url)
+    {
+        using (UnityWebRequest webRequest = UnityWebRequest.Get(url))
+        {
+            yield return webRequest.SendWebRequest();
+            switch (webRequest.result)
+            {
+                case UnityWebRequest.Result.ConnectionError:
+                case UnityWebRequest.Result.DataProcessingError:
+                    Debug.LogError(String.Format("Something went wrong: {0}", webRequest.error));
+                    break;
+                case UnityWebRequest.Result.Success:
+                     onlineWord = RemoveAccentsAndHyphens(webRequest.downloadHandler.text).ToUpper();
+                     //Debug.Log(onlineWord);
+                     onlineWord = onlineWord.Substring(2, onlineWord.Length - 4);
+                     //Debug.Log(onlineWord);
+                    break;
+            }
         }
     } 
 }

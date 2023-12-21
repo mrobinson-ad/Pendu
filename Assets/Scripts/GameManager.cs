@@ -71,6 +71,19 @@ public class GameManager : MonoBehaviour
         instance.wordDisplay.text = hiddenWord;
     }
 
+    public void DisplayOnlineWord() // Creates hiddenWord string with "_" corresponding to the amount of letters in the word to guess
+    {
+        hiddenWord = "";
+         wordToGuess = wordList.GetOnlineWord();
+        for (int i = 0; i < wordToGuess.Length; i++)
+        {
+            hiddenWord = hiddenWord + "_";
+        }
+        Debug.Log(hiddenWord);
+        Debug.Log(wordToGuess);
+        instance.wordDisplay.text = hiddenWord;
+    }
+
     public void Reset()
     {
         foreach (Petal petal in petals)
