@@ -15,6 +15,8 @@ public class LetterClick : MonoBehaviour
 
     [SerializeField] AudioClip fail;
 
+    [SerializeField] Slider volumeSlider;
+
     [SerializeField] AudioClip success;
 
     [SerializeField] AudioClip hover;
@@ -50,7 +52,7 @@ public class LetterClick : MonoBehaviour
         if (GameManager.wordToGuess.Contains(letterGuess)){
         // Iterate through each character in the wordToGuess
         source.clip = success;
-        source.volume = 1;
+        source.volume = volumeSlider.value*2f;
         source.Play();
          GetComponent<Image>().color = new Color32(0,255,60,255);
         for (int i = 0; i < GameManager.wordToGuess.Length; i++)
@@ -68,7 +70,7 @@ public class LetterClick : MonoBehaviour
         else 
         {
             source.clip = fail;
-            source.volume = 1;
+            source.volume = volumeSlider.value*2f;
             source.Play();
             GetComponent<Image>().color = new Color32(255,50,0,255);
             flower.lives -= 1;
@@ -89,7 +91,7 @@ public class LetterClick : MonoBehaviour
         wordDisplay.text = WordToDisplay;
         if (WordToDisplay == GameManager.wordToGuess)
         {
-            gameManager.Invoke("Win", 2);
+            gameManager.Invoke("Win", 1);
         }
 
     }
@@ -99,6 +101,7 @@ public class LetterClick : MonoBehaviour
         GetComponent<Image>().color = new Color32(255,255,255,255);
         button.interactable = true;
         source.clip = hover;
-        source.volume = 0.2f;
+        source.volume = volumeSlider.value*0.4f;
     }
+
 }

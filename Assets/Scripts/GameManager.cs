@@ -104,7 +104,13 @@ public class GameManager : MonoBehaviour
         winMusic.Stop();
         loseScreen.enabled = false;
         loseMusic.Stop();
-        bgm.Play();
+        conffettiLeft.Stop(true,ParticleSystemStopBehavior.StopEmittingAndClear);
+        conffettiRight.Stop(true,ParticleSystemStopBehavior.StopEmittingAndClear);
+        if (bgm.isPlaying != true)
+        {
+           bgm.Play(); 
+        }    
+        rain.Stop(true,ParticleSystemStopBehavior.StopEmittingAndClear);
 
         DisplayWord();
     }

@@ -26,7 +26,7 @@ public class WrongGuess : MonoBehaviour
 
         if (lives == 0)
         {
-            gameManager.Invoke("Lose", 2);
+            gameManager.Invoke("Lose", 1);
         }
     }
 
