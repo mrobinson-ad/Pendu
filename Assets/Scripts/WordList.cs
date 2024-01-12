@@ -14,6 +14,9 @@ public class WordList : MonoBehaviour
     private List<string> french = new List<string>();
     private List<string> spanish = new List<string>();
 
+    [SerializeField] 
+   private Canvas error;
+
     [SerializeField]
     string language;
 
@@ -29,12 +32,10 @@ public class WordList : MonoBehaviour
     void Awake()
     {
         FillList();
-        GetOnlineWord();
     }
 
     void FillList()
     {
-        // Assuming you have a WordSetting class
         WordsSetting English = new WordsSetting("English", english);
 
         // Fill English list with words containing at least 5 characters
@@ -169,7 +170,7 @@ public class WordList : MonoBehaviour
             language = "spanish";
         }
     }
-
+// Gets the word from the random word api depending on the selected language (french not supported atm)
     public string GetOnlineWord()
     {
         string word;
@@ -188,8 +189,8 @@ public class WordList : MonoBehaviour
             return word;
             }
     }
-
-    IEnumerator GetRequest(String url)
+    // Coroutine to access the url provided and convert the word to the proper format for the game (remove "" and special characters and put it in uppercase)
+    public IEnumerator GetRequest(String url)
     {
         using (UnityWebRequest webRequest = UnityWebRequest.Get(url))
         {
@@ -198,7 +199,9 @@ public class WordList : MonoBehaviour
             {
                 case UnityWebRequest.Result.ConnectionError:
                 case UnityWebRequest.Result.DataProcessingError:
+                    error.enabled = true;
                     Debug.LogError(String.Format("Something went wrong: {0}", webRequest.error));
+
                     break;
                 case UnityWebRequest.Result.Success:
                      onlineWord = RemoveAccentsAndHyphens(webRequest.downloadHandler.text).ToUpper();

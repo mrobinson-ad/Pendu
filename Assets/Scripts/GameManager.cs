@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
    [SerializeField] 
    private ParticleSystem conffettiLeft;
 
-      [SerializeField] 
+    [SerializeField] 
    private ParticleSystem rain;
 
    [SerializeField] 
@@ -43,6 +43,9 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     private TextMeshProUGUI wordDisplay ;
+
+    [SerializeField]
+    private TextMeshProUGUI wordDev ;
 
      public static GameManager instance;
     void Start()
@@ -56,6 +59,10 @@ public class GameManager : MonoBehaviour
         petals = FindObjectsOfType<Petal>();
         letters = FindObjectsOfType<LetterClick>();
         bgm = gameObject.GetComponent<AudioSource> ();
+        foreach (LetterClick letter in letters)
+            {
+                letter.ResetLetter();
+            }
     }
 
     public void DisplayWord() // Creates hiddenWord string with "_" corresponding to the amount of letters in the word to guess
@@ -66,25 +73,32 @@ public class GameManager : MonoBehaviour
         {
             hiddenWord = hiddenWord + "_";
         }
+        wordDev.text = "The word is " + wordToGuess;
         Debug.Log(hiddenWord);
         Debug.Log(wordToGuess);
         instance.wordDisplay.text = hiddenWord;
     }
 
-    public void DisplayOnlineWord() // Creates hiddenWord string with "_" corresponding to the amount of letters in the word to guess
+    public void DisplayOnlineWord() // Same as DisplayWord but takes the online word
     {
+
+        if (wordList.GetOnlineWord() != null){
         hiddenWord = "";
          wordToGuess = wordList.GetOnlineWord();
         for (int i = 0; i < wordToGuess.Length; i++)
         {
             hiddenWord = hiddenWord + "_";
         }
+        wordDev.text = "The word is " + wordToGuess;
         Debug.Log(hiddenWord);
         Debug.Log(wordToGuess);
         instance.wordDisplay.text = hiddenWord;
+        } else {
+            DisplayWord();
+        }
     }
 
-    public void Reset()
+    public void Reset() //resets the flower and keyboard, stops the particles and restarts the music if called after a game over state
     {
         foreach (Petal petal in petals)
         {
@@ -115,7 +129,7 @@ public class GameManager : MonoBehaviour
         DisplayWord();
     }
 
-    public void Win()
+    public void Win() // shows the win screen and conffetti particles along with the win music
     {
         instance.winScreen.enabled = true;
         winMusic.Play();
@@ -125,7 +139,7 @@ public class GameManager : MonoBehaviour
         keyboard.KeyboardOff();
     }
 
-    public void Lose()
+    public void Lose() // shows the lose screen and rain particles along with the lose music
     {
         instance.loseScreen.enabled = true;
         loseMusic.Play();

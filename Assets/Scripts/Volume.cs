@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Audio;
 
 public class Volume : MonoBehaviour
 {
@@ -20,14 +21,22 @@ public class Volume : MonoBehaviour
     [SerializeField]
     Slider volumeSlider;
 
-    public void OnVolumeChange()
+    [SerializeField]
+    AudioMixer audioMixer;
+    
+
+    public void OnMusicChange()
     {
         gameManager.volume = volumeSlider.value;
         lose.volume = volumeSlider.value;
         win.volume = volumeSlider.value;
+    }
+
+        public void OnFxChange()
+    {
         foreach (AudioSource key in keys)
         {
-            key.volume = volumeSlider.value*0.4f;
+            key.volume = volumeSlider.value;
         }
     }
 }

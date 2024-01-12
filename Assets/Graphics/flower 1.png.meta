@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: ec553aa9b5d98d84081542d078774b16
+guid: bf9302be368f49b4c937db901330afa8
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -39,11 +39,11 @@ TextureImporter:
     mipBias: 0
     wrapU: 1
     wrapV: 1
-    wrapW: 0
+    wrapW: 1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -63,9 +63,9 @@ TextureImporter:
   compressionQualitySet: 0
   textureFormatSet: 0
   ignorePngGamma: 0
-  applyGammaDecoding: 1
+  applyGammaDecoding: 0
   swizzle: 50462976
-  cookieLightType: 1
+  cookieLightType: 0
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -147,7 +147,70 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: flower 1_1
+      rect:
+        serializedVersion: 2
+        x: 630
+        y: 1683
+        width: 339
+        height: 471
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c92c9161a507e044d97e3ba137b33326
+      internalID: 604363188
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flower 1_2
+      rect:
+        serializedVersion: 2
+        x: 79
+        y: 1700
+        width: 378
+        height: 364
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b7d742564958b534fbc082c1186d195e
+      internalID: 74149457
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flower 1_7
+      rect:
+        serializedVersion: 2
+        x: 92
+        y: 200
+        width: 744
+        height: 1222
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 977f00654412cd4428cd80428afc89fe
+      internalID: -1879427957
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -158,7 +221,15 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      flower 1_0: 411248578
+      flower 1_1: 604363188
+      flower 1_2: 74149457
+      flower 1_3: 2121909246
+      flower 1_4: 342206245
+      flower 1_5: 3122072
+      flower 1_6: -912109703
+      flower 1_7: -1879427957
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

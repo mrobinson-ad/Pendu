@@ -101,7 +101,7 @@ public class LetterClick : MonoBehaviour
         GetComponent<Image>().color = new Color32(255,255,255,255);
         button.interactable = true;
         source.clip = hover;
-        source.volume = volumeSlider.value*0.4f;
+        source.volume = volumeSlider.value;
     }
 
 }
